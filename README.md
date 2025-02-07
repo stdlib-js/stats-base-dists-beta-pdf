@@ -58,20 +58,32 @@ where `alpha > 0` is the first shape parameter and `beta > 0` is the second shap
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/stats-base-dists-beta-pdf
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import pdf from 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-dists-beta-pdf@esm/index.mjs';
-```
-
-You can also import the following named exports from the package:
-
-```javascript
-import { factory } from 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-dists-beta-pdf@esm/index.mjs';
+var pdf = require( '@stdlib/stats-base-dists-beta-pdf' );
 ```
 
 #### pdf( x, alpha, beta )
@@ -156,15 +168,10 @@ y = mypdf( 0.3 );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="module">
-
-import randu from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-randu@esm/index.mjs';
-import EPS from 'https://cdn.jsdelivr.net/gh/stdlib-js/constants-float64-eps@esm/index.mjs';
-import pdf from 'https://cdn.jsdelivr.net/gh/stdlib-js/stats-base-dists-beta-pdf@esm/index.mjs';
+```javascript
+var randu = require( '@stdlib/random-base-randu' );
+var EPS = require( '@stdlib/constants-float64-eps' );
+var pdf = require( '@stdlib/stats-base-dists-beta-pdf' );
 
 var alpha;
 var beta;
@@ -179,15 +186,111 @@ for ( i = 0; i < 10; i++ ) {
     y = pdf( x, alpha, beta );
     console.log( 'x: %d, α: %d, β: %d, f(x;α,β): %d', x.toFixed( 4 ), alpha.toFixed( 4 ), beta.toFixed( 4 ), y.toFixed( 4 ) );
 }
-
-</script>
-</body>
-</html>
 ```
 
 </section>
 
 <!-- /.examples -->
+
+<!-- C interface documentation. -->
+
+* * *
+
+<section class="c">
+
+## C APIs
+
+<!-- Section to include introductory text.  Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
+
+<section class="intro">
+
+</section>
+
+<!-- /.intro -->
+
+<!-- C usage documentation. -->
+
+<section class="usage">
+
+### Usage
+
+```c
+#include "stdlib/stats/base/dists/beta/pdf.h"
+```
+
+#### stdlib_base_dists_beta_pdf( x, alpha, beta )
+
+Evaluates the probability density function (PDF) for a beta distribution with first shape parameter `alpha` and second shape parameter `beta`.
+
+```c
+double y = stdlib_base_dists_beta_pdf( 0.5, 1.0, 1.0 );
+// returns 1.0
+```
+
+The function accepts the following arguments:
+
+-   **x**: `[in] double` input value.
+-   **alpha**: `[in] double` first shape parameter.
+-   **beta**: `[in] double` second shape parameter.
+
+```c
+double stdlib_base_dists_beta_pdf( const double x, double alpha, const double beta );
+```
+
+</section>
+
+<!-- /.usage -->
+
+<!-- C API usage notes. Make sure to keep an empty line after the `section`
+element and another before the `/section` close. -->
+
+<section class="notes">
+
+</section>
+
+<!-- /.notes -->
+
+<!-- C API usage examples. -->
+
+<section class="examples">
+
+### Examples
+
+```c
+#include "stdlib/stats/base/dists/beta/pdf.h"
+#include "stdlib/constants/float64/eps.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+static double random_uniform( const double min, const double max ) {
+    double v = (double)rand() / ( (double)RAND_MAX + 1.0 );
+    return min + ( v*(max-min) );
+}
+
+int main( void ) {
+    double alpha;
+    double beta;
+    double x;
+    double y;
+    int i;
+
+    for ( i = 0; i < 10; i++ ) {
+        x = random_uniform( 0.0, 1.0 );
+        alpha = random_uniform( STDLIB_CONSTANT_FLOAT64_EPS, 5.0 );
+        beta = random_uniform( STDLIB_CONSTANT_FLOAT64_EPS, 5.0 );
+        y = stdlib_base_dists_beta_pdf( x, alpha, beta );
+        printf( "x: %1f. α: %1f. β: %1f. f(x;α,β): %lf\n", x, alpha, beta, y );
+    }
+}
+```
+
+</section>
+
+<!-- /.examples -->
+
+</section>
+
+<!-- /.c -->
 
 <!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
 
@@ -206,7 +309,7 @@ for ( i = 0; i < 10; i++ ) {
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
